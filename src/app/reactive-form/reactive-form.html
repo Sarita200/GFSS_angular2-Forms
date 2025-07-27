@@ -1,1 +1,82 @@
-<p></p>
+<div class="container border border-3 mt-3 p-3">
+    <div row my-3>
+        <div class="col-12">
+            <div class="py-3 text-center">
+                <h3>Reactive form with Validataion</h3>
+            </div>
+        </div>
+    </div>
+
+    <form class="row g-3" [formGroup]="studentObj">
+        <div class="col-md-6">
+            <label for="firstName" class="form-label" >First Name</label>
+            <input type="text" name="fname" class="form-control" formControlName="firstName" 
+             id="firstName" required minlength="3"/>
+
+             <div class="text-danger">
+                @if( studentObj.controls['firstName'].touched && studentObj.controls['firstName'].errors?.['required'] ){
+                <span>This is required</span>
+             } @else if( studentObj.controls['firstName'].touched && studentObj.controls['firstName'].errors?.['minlength'] ){
+                <span>min 3 characters</span>
+             }
+             </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="lastName" class="form-label">Last  Name</label>
+            <input type="text" name="lname" class="form-control" formControlName="lastName"
+             id="lastName">
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputAddress" class="form-label">Address</label>
+            <input type="text" name="address" class="form-control" formControlName="address" 
+             id="inputAddress">
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputCity" class="form-label">City</label>
+            <input type="text" name="city" class="form-control" formControlName="city"
+             id="inputCity">
+
+            <div class="text-danger">
+                @if(studentObj.controls['city'].touched && studentObj.controls['city'].errors?.['required']){
+                    <span>This is required</span>
+                } @else if(studentObj.controls['city'].touched && studentObj.controls['city'].errors?.['minlength']){
+                    <span>min 3 characters</span>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputZip" class="form-label">Zip</label>
+            <input type="text" name="zip" class="form-control" formControlName="zip" 
+             id="inputZip">
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-check">
+                <input class="form-check-input" name="accept" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                    Agree to terms and conditions
+                </label>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <button type="submit" class="btn btn-primary mx-3" (click)="saveForm()">Save</button>
+            
+        </div>
+
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+         <div class="col-12">
+            <div>
+                {{formValue | json}}
+            </div>
+         </div>
+    </div>
+</div>
